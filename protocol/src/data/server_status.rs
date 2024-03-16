@@ -1,4 +1,3 @@
-use crate::data::chat::Message;
 use crate::impl_json_encoder_decoder;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -7,9 +6,11 @@ use uuid::Uuid;
 pub struct ServerStatus {
     pub version: ServerVersion,
     pub players: OnlinePlayers,
-    pub description: Message,
+    pub description: String,
     pub favicon: Option<String>,
 }
+
+impl_json_encoder_decoder!(ServerStatus);
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct ServerVersion {
@@ -30,5 +31,3 @@ pub struct OnlinePlayer {
     pub name: String,
     pub id: Uuid,
 }
-
-impl_json_encoder_decoder!(ServerStatus);

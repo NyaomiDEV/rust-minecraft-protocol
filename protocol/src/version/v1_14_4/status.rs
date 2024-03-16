@@ -1,8 +1,11 @@
-use crate::data::server_status::*;
+use crate::data::chat::Message;
+use crate::data::server_status::{OnlinePlayers, ServerVersion};
 use crate::decoder::Decoder;
 use crate::error::DecodeError;
+use crate::impl_json_encoder_decoder;
 use crate::{set_packet_id, version::PacketId};
 use minecraft_protocol_derive::{Decoder, Encoder};
+use serde::{Deserialize, Serialize};
 use std::io::Read;
 
 set_packet_id!(StatusRequest, 0x00);
@@ -10,6 +13,16 @@ set_packet_id!(PingRequest, 0x01);
 
 set_packet_id!(StatusResponse, 0x00);
 set_packet_id!(PingResponse, 0x01);
+
+#[derive(Clone, Serialize, Deserialize, Debug)]
+pub struct ServerStatus {
+    pub version: ServerVersion,
+    pub players: OnlinePlayers,
+    pub description: Message,
+    pub favicon: Option<String>,
+}
+
+impl_json_encoder_decoder!(ServerStatus);
 
 pub enum StatusServerBoundPacket {
     StatusRequest(StatusRequest),
@@ -102,6 +115,7 @@ impl StatusResponse {
 #[cfg(test)]
 mod tests {
     use crate::data::chat::{Message, Payload};
+    use crate::data::server_status::OnlinePlayer;
     use crate::decoder::Decoder;
     use crate::encoder::Encoder;
     use crate::version::v1_14_4::status::*;
