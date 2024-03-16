@@ -4,6 +4,7 @@ pub mod v1_16_3;
 pub mod v1_16_4;
 pub mod v1_17;
 pub mod v1_17_1;
+pub mod v1_20_3;
 
 /// Trait to obtain packet ID from packet data.
 pub trait PacketId {

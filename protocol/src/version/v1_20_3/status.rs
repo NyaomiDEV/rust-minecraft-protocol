@@ -1,4 +1,3 @@
-use crate::data::chat::Message;
 use crate::data::server_status::{OnlinePlayers, ServerVersion};
 use crate::decoder::Decoder;
 use crate::error::DecodeError;
@@ -115,7 +114,7 @@ impl StatusResponse {
 #[cfg(test)]
 mod tests {
     use crate::data::chat::{Message, Payload};
-    use crate::data::server_status::OnlinePlayer;
+    use crate::data::server_status::{OnlinePlayer, OnlinePlayers, ServerVersion};
     use crate::decoder::Decoder;
     use crate::encoder::Encoder;
     use crate::version::v1_14_4::status::*;
