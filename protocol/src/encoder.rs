@@ -258,7 +258,7 @@ pub mod uuid_hyp_str {
                 writer.write_all(value.as_bytes())?;
             }
             _ => {
-                let uuid_hyphenated_string = value.to_hyphenated().to_string();
+                let uuid_hyphenated_string = value.as_hyphenated().to_string();
                 writer.write_string(&uuid_hyphenated_string, 36)?;
             }
         }

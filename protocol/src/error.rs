@@ -2,7 +2,7 @@ use nbt::decode::TagDecodeError;
 use serde_json::error::Error as JsonError;
 use std::io::Error as IoError;
 use std::string::FromUtf8Error;
-use uuid::parser::ParseError as UuidParseError;
+use uuid::Error as UuidError;
 
 /// Possible errors while encoding packet.
 #[derive(Debug)]
@@ -61,7 +61,7 @@ pub enum DecodeError {
     /// Boolean are parsed from byte. Valid byte value are 0 or 1.
     NonBoolValue,
     UuidParseError {
-        uuid_parse_error: UuidParseError,
+        uuid_parse_error: UuidError,
     },
     /// Type id was not parsed as valid enum value.
     UnknownEnumType {
@@ -93,8 +93,8 @@ impl From<FromUtf8Error> for DecodeError {
     }
 }
 
-impl From<UuidParseError> for DecodeError {
-    fn from(uuid_parse_error: UuidParseError) -> Self {
+impl From<UuidError> for DecodeError {
+    fn from(uuid_parse_error: UuidError) -> Self {
         DecodeError::UuidParseError { uuid_parse_error }
     }
 }
