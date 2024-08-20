@@ -32,7 +32,7 @@ impl HandshakeServerBoundPacket {
 pub struct Handshake {
     #[data_type(with = "var_int")]
     pub protocol_version: i32,
-    #[data_type(max_length = 255)]
+    #[data_type(max_length = 65535)]
     pub server_addr: String,
     pub server_port: u16,
     #[data_type(with = "var_int")]
